@@ -36,3 +36,10 @@ acl authenticated proxy_auth REQUIRED
 # add these 3 lines in conf, anyways copy paste the squid.conf file, you're good to go.
 
 # And don't forget to create etc/squid/restricted-sites.squid file if you're using my config file
+
+========================='
+╰─>$ cat restricted-sites.squid 
+.youtube.com
+.facebook.com
+.netflix.com
+
