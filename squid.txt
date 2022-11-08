@@ -1,0 +1,26 @@
+Centos
+login to root sudo su
+sir -> rsync -Pav 192.168.8.38:/etc/squid /etc/
+firstly check the squid folder - cd /etc/ , ls
+then we will check the host file & mention the host name we want to restrict
+further (i.e abc.apsit.com)
+commands-
+# vim /etc/hosts
+mention the ip address (ur own ip add) with the name(eg - 192.168.1.1
+abc.apsit.com)
+Then we will create a user name & pass
+#htpasswd /etc/squid/passwd <username>
+type pass
+confirm pass
+Then we will move to domains which we want to block
+# vim /etc/squid/forbidden_domains
+.facebook.com
+.youtube.com
+Then after this restart the services
+# service squid restart
+# service httpd restart
+Go to browser & do the certain changes.
+preferences->advanced->network->settings->click on manual proxy->HTTP proxy:put ur
+ip add & Port : 3128 -> click ok
+click on new tab nd type abc.apsit.com
+nd u will receive an login page & Done
