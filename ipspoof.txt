@@ -1,0 +1,33 @@
+----------------Exp2_Ip spoofing-----------------
+In centos
+1. Search for netkit Folder ( Mostly Present in Downloads(Ubuntu) or in
+Desktop(CentOs))
+2.Type Command vstart pc1 --eth0=A
+vstart pc2 --eth0=A
+vstart pc3 --eth0=A
+3. Assign Ip to all Pc's
+ifconfig eth0 192.168.1.11 (pc1)
+ifconfig eth0 192.168.1.12 (pc2)
+ifconfig eth0 192.168.1.13 (pc3)
+4. Spoof the ip of pc2 from pc1 (pc1 will act as pc2 after spoofing)
+Type Command in pc1: iptables -t nat -A POSTROUTING -p icmp -j SNAT --to-source
+192.168.1.12
+5. After spoofing ping from pc1 to pc3( Acting as pc2)
+Type Command ping 192.168.1.13
+5.Type tcpdump command in pc2 and pc3
+Type Command tcpdump -i any ( in pc2 and pc3)
+---------------------ARP Spoofing(IN UBUNTU)1. Install arpwatch
+sudo apt install arpwatch
+cat /etc/sysconfig/arpwatch
+check interface name is present or
+not
+2.sudo service arpwatch status
+3.Now open another terminal
+4. in first terminal ping to any pc
+type command ping ip address and then press ctrl + C
+5. In another terminal type the below command
+type command sudo tail -f /var/log/syslog
+6. Again back to terminal 1 type command to change MAC Address
+type command sudo ifconfig enp4s0 hw ether 00:1a:ff:0a:e7:1b
+and then again ping using command ping ip address
+7. Check(Observe) the change in another terminal
