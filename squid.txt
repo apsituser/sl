@@ -24,3 +24,15 @@ preferences->advanced->network->settings->click on manual proxy->HTTP proxy:put 
 ip add & Port : 3128 -> click ok
 click on new tab nd type abc.apsit.com
 nd u will receive an login page & Done
+
+===============================
+Some recommended update:
+for auth
+
+auth_param basic program /usr/lib/squid3/basic_ncsa_auth /etc/squid/passwords
+auth_param basic realm proxy
+acl authenticated proxy_auth REQUIRED
+
+# add these 3 lines in conf, anyways copy paste the squid.conf file, you're good to go.
+
+# And don't forget to create etc/squid/restricted-sites.squid file if you're using my config file
