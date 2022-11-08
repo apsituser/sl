@@ -1,0 +1,39 @@
+tcpdump -i lo -> ping 127.0.0.1
+tcpdump -i enp4s0 port 80
+tcpdump -D -> it will display all interfaces
+tcpdump -i lo -A -> ping 127.0.0.1 -> display in ascii
+tcpdump -i lo -c 5 -> ping 127.0.0.1 -> only capture 5 packets
+tcpdump -i lo -w file.pcap -> ping 127.0.0.1 -> capture and store in file.pcap
+tcpdump -r file.pcap -> just run this command store packet will be display
+tcpdump -i enp4s0 tcp
+tcpdump -i enp4s0 -n -A -xx port 22 (for packet generation do shh process ssh
+aspit@ipaddress)
+tcpdump -i enp4s0 -n -A -xx port 80 (for packet generation ping from 1pc to another
+pc)
+tcpdump -i enp4s0 -n -A -xx icmp
+-------------3B Wireshark--------------
+1. Filter traffic on specific IP address
+This will display all traffic for the IP entered, source or destination.
+ip.addr==192.168.1.2
+2. Filter by source address
+This will only show traffic where the source IP address is 192.168.1.2
+ip.src==192.168.1.2
+3. Filter by destination address
+Displays only traffic for the matching destination IP.
+ip.dst==192.168.1.2
+4. Filter on TCP port
+tcp.port==80
+tcp.srcport==80
+tcp.dstport==80
+5. Filter background network noise
+There are several protocols that can be very noisy, it sometimes helps to filter
+this out so you can focus on other traffic.
+!(arp or icmp or dns)
+This will filter out arp, icmp and DNS traffic.
+6.Filter on port and IP Address
+If you want to see traffic from a certain IP on a specific port use this filter
+tcp.port 80 && ip.addr == 192.168.1.2
+This will show only port 80 (https) that has IP 192.168.1.2 in the source or
+destination.
+7. Detecting SYN Floods (Possible DDoS attacks)
+tcp.flags.syn == 1 and tcp.flags.ack == 0

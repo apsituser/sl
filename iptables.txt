@@ -1,0 +1,32 @@
+#condition given to perform without firewall / we don't get any response (ensures
+to drop firewall)
+# service firewalld stop
+rpm -q iptables / iptables -v
+check httpd & sshd service is install or
+iptables -L
+not
+PC1
+iptables -p INPUT DROP
+iptables -p OUTPUT DROP
+Allowing Outgoing SSH-
+sudo iptables -A OUTPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j
+ACCEPT
+sudo iptables -A INPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j
+ACCEPT
+Allowing incoming http-
+sudo iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j
+ACCEPT
+sudo iptables -A OUTPUT -p tcp --sport 80 -m conntrack --ctstate ESTABLISHED -j
+ACCEPT
+Pc2
+No commands needed.
+TO CHECK the implementation-
+1.browse to any website for http
+2.ssh apsit@ip
+------------Alternative for checking implementation----------
+on machine1
+ssh apsit@mach2
+keep default policy pf mac1 on mach2 browser
+then put ipadd of mach1 on mach2 browseriptables --flush
+iptables -p INPUT ACCEPT
+iptables -p OUTPUT ACCEPT

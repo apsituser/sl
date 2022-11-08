@@ -1,0 +1,15 @@
+sudo su
+yum install namp
+service httpd start
+service httpd status
+In terminal 1
+nmap -sS 127.0.0.1 -p 80 (SYN scan open)
+nmap -sT 127.0.0.1 -p 80 (FULL scan open)
+nmap -sF 127.0.0.1 -p 80 (FIN scan open)
+nmap -sN 127.0.0.1 -p 80 (NULL scan open)
+nmap -sV 127.0.0.1 -p 80 (VERSION scan open)
+nmap -sS -O <host ipaddress (OS scan open)nmap -sX 127.0.0.1 -p 80 (XMAS scan open)
+nmap -sS ipadd/lo ipadd
+In terminal 2
+tcpdump -i enp4s0/lo -n -A -xx port 80
+For close use service httpd stop and run above commands

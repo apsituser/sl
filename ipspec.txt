@@ -1,0 +1,27 @@
+In ubuntu Require 2 pc
+Open fedora in VB
+login as root
+open terminal type -> ipsec-tools or yum install ipsec-tools
+Go to VB setting->network->mode of networking->select Bridge adapter
+Come back to fedora (steps to perform on both pc's)
+system-config-network
+The ipsec terminal will be open(perform this on both the pc)
+click on Ipsec on the bar given below -> click on New -> one different page will be
+open
+type any name
+select -> host 2 host
+select protocol -> rakoon
+type ipadd of Another Pc
+type key & password (both should be same for both pc's)
+key=123456
+click ok
+Then click on Deactivate
+Then click on activate
+Then click on save
+Then click on quit
+service network restart
+on pc1 terminal type-> tcpdump -i any -n -A -xx Ipadd of pc2
+If Above command give error runs this -> tcpdump -i any/enp4s0 -nXXX host Ipadd of
+pc2
+in this tcpdump logs us should see logs as ESP AH
+on pc2 terminal type-> ping pc1

@@ -1,0 +1,56 @@
+erifying state of snort daemon after installation :
+ps -aux | grep snort
+service snort status
+#type command for packet capturing mode
+directly put the commands no need to go in any directory
+In terminal 1
+snort -d -l /var/log/snort/ -c /etc/snort/snort.conf -i enp4s0
+In terminal 2
+ping ipadd
+#type command for packet Logger mode
+(logs files are generated in /var/log/snort/ )
+#Type command the following command
+In terminal 1
+snort -l /var/log/snort -b -h ipadd
+In terminal 2
+cd /var/log/snort
+ls
+then choose the latest log file our logs will be generated
+#to read the file
+tcpdump -r /var/log/snort/snort.log.________
+(in _________ put latest file)
+# Do'nt run the below command it is for reference for above command how it will be
+looking
+tcpdump -r /var/log/snort/snort.log.1492253446
+#type command for IDS/NIDS mode
+cd
+cd /etc/snort
+search for snort.conf by ls
+cat /etc/snort/snort.conf (it will include)
+include /etc/snort/rules/rules/icmp.rules
+include /etc/snort/rules/rules/telnet.rules
+-------->include /etc/snort/rules/rules/myrules.rules
+if above is present then cat /etc/snort/rules/myrules.rules -> should contain
+include 3 rules then type (snort -d -l... search for this command below and
+continue from there)
+Then we will move rules folder & create & new rule/generate alert in rule by
+creating myrules.rule
+cd /etc/snort/rules
+cat/vim myrules.rules (type the below code in it)
+alert tcp ipadd any -> any any (msg:"Hello"; flags:S; sid:10000;)
+alert tcp ipadd any -> ipadd any (msg:"You are captured"; nocase; sid:10002;)
+#alert tcp/icmp any <> any any (msg:"you are gone"; sid:10003;)save and exit
+After creating myrules.rules we will include in snort.conf file
+cd ..
+cd /etc/snort/snort.conf
+vim snort.conf
+Type -> include /etc/snort/rules/myrules.rules (save & exit)
+Then type command
+snort -d -l /var/log/snort/ -c /etc/snort/snort.conf -i enp4s0
+In another terminal
+type command
+tail -f /var/log/snort/alert
+(Alert will be generated you can see it in)
+cd /var/log/snort (ls -l /var/log/snort/ | grep alert)
+ls -l
+(you can see alert file)
